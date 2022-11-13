@@ -1,0 +1,22 @@
+{
+  "name": "backend-emiipm",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emiimp/backend-emiimp.git"
+  },
+  "keywords": [
+    "nodejs"
+  ],
+  "author": "Emilia Imperiale",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/emiimp/backend-emiimp/issues"
+  },
+  "homepage": "https://github.com/emiimp/backend-emiimp#readme"
+}
