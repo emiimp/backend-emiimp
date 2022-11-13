@@ -129,3 +129,8 @@ contenedor.save('hoja', 5, 'www.dsfsd111.com',contenedor)
 contenedor.deleteById(2)
 //Metodo para borrar todo
 // contenedor.deleteAll()
+
+
+
+
+//--------------- DESAFÍO CLASE 6 -------------- hiiiii
