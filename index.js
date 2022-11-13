@@ -9,6 +9,7 @@ class Usuario {
     }
 
 // Metodos
+
     getFullName = () => { console.log(`El nombre del usuario es ${this.name} ${this.lastName}`) }
 
     addPet = (newPet) => {
@@ -47,8 +48,25 @@ if (typeof module !== 'undefined') {
     module.exports = Usuario;
 }
 
-const fs = require('fs')
 
+
+// DESAFÍO CLASE 6 - EXPRESS SERVER
+
+
+
+// --------- AGREGO para el desafío clase 6 
+
+const express = require('express');
+
+const fs = require('fs');
+
+const app = express();
+
+const server = app.listen(8080, () => {
+    console.log('Servidor corriendo en el puerto 8080');
+});
+
+// --------- 
 
 class Contenedor {
     constructor() {
@@ -83,72 +101,61 @@ class Contenedor {
             console.log(error)
         }
 
-        console.log('Archivo guardado!')
+        console.log('Archivo guardado')
     }
 
 
-    getByID = (id) => {
-        const data = fs.readFileSync('./desafio.txt', 'utf-8')
-        console.log('getById', JSON.parse(data).find(x => x.id === id))
-    }
+    // --------- AGREGO para el desafío clase 6 
 
-    getAll = () => {
-        const data = fs.readFileSync('./desafio.txt', 'utf-8')
-        console.log(data)
-    }
+    getAll = async () => {
 
-    deleteById =  (id) => {
         try {
-            const data = fs.readFileSync('./desafio.txt', 'utf-8')
-            const newArray = JSON.parse(data)
-             const filteredArray = newArray.filter(x => x.id !== id)
-            
-            fs.writeFileSync('./desafio.txt', `${JSON.stringify(filteredArray)}`)
-            console.log('Producto eliminado', filteredArray)
+            if (fs.existsSync('./desafio.txt')) {
+                const data = JSON.parse(fs.readFileSync('./desafio.txt', 'utf-8'))
+                console.log(data)
+            } else {
+                console.log('No hay productos')
+            }
         } catch (error) {
             console.log(error)
         }
     }
 
-    deleteAll = async () => {
-        await fs.promises.writeFile('./desafio.txt', ``)
-        console.log('Productos eliminados')
+    getRandom = async () => {
+        try {
+            if (fs.existsSync('./desafio.txt')) {
+                const data = JSON.parse(fs.readFileSync('./desafio.txt', 'utf-8'))
+                const random = Math.floor(Math.random() * data.length)
+                console.log(data[random])
+            } else {
+                console.log('No hay productos')
+            }
+        } catch (error) {
+            console.log(error)
+        }
     }
 }
 
-// Instancio y guardo los productos nuevos
 const contenedor = new Contenedor()
-contenedor.save('cartuchera', 100, 'www.dsfsd.com', contenedor)
-contenedor.save('lapiz', 20, 'www.dsfsdsss.com', contenedor)
-contenedor.save('hoja', 5, 'www.dsfsd111.com',contenedor)
-//Obtengo todos los productos
-// contenedor.getAll()
-//Obtengo el producto con ID 2
-// contenedor.getByID(2)
-//Elimino el producto con ID 2
-contenedor.deleteById(2)
-//Metodo para borrar todo
-// contenedor.deleteAll()
+
+contenedor.save('cartera', 102, 'https://images.pexels.com/photos/904350/pexels-photo-904350.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', contenedor);
+contenedor.save('book', 5, 'https://images.pexels.com/photos/762687/pexels-photo-762687.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', contenedor);
+contenedor.save('umbrella', 100, 'https://images.pexels.com/photos/1715161/pexels-photo-1715161.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', contenedor);
 
 
-//----------------------clase 5----------------------//
+app.get('/productos', (req, res) => {
+    contenedor.getAll()
+    res.send('Productos')
+})
 
-// HELLO WORLD en Node.js
+app.get('/productosRandom', (req, res) => {
+    contenedor.getRandom()
+    res.send('Productos Random')
+})
 
-const http = require('http');
-
-const hostname = '127.0.0.1';
-const port = 3001;
-
-const server = http.createServer((req, res) => {
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'text/plain');
-    res.end('Hello World');
-});
-
-server.listen(port, hostname, () => {
-    console.log(`Server running at http://${hostname}:${port}/`);
-});
+// --------- 
 
 
-//--------------- DESAFÍO CLASE 6 -------------- hiiiii
+
+
+// DESAFÍO CLASE 7 
