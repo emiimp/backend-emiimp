@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/emiimp/backend-emiimp/issues"
   },
-  "homepage": "https://github.com/emiimp/backend-emiimp#readme"
+  "homepage": "https://github.com/emiimp/backend-emiimp#readme",
+  "dependencies": {
+    "chalk": "^4.1.2"
+  }
 }
